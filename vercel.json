@@ -8,7 +8,14 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/(.*\\.(js|css|mjs|json|woff2?|ttf|svg|png|jpe?g|gif|ico|map))$",
+      "dest": "/$1"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
       "dest": "/index.html"
     }
   ]
