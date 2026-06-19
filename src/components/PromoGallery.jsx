@@ -236,6 +236,15 @@ export default function PromoGallery() {
           .promo-gallery-side-left {
             display: none;
           }
+
+          .promo-gallery-side-right {
+            min-height: auto;
+          }
+
+          .promo-gallery-side-right .promo-gallery-subcol {
+            min-height: 400px;
+            max-height: 400px;
+          }
         }
 
         @keyframes promoGalleryScroll {

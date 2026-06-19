@@ -64,8 +64,8 @@ export default function Categories() {
       aria-label="Shop Categories"
     >
       {/* ── Section header ── */}
-      <div className="max-w-[1400px] mx-auto px-3 sm:px-4 mb-7 sm:mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
-        <div className="text-left">
+      <div className="max-w-[1400px] mx-auto px-3 sm:px-4 mb-7 sm:mb-12 flex flex-col items-center text-center sm:flex-row sm:items-end sm:justify-between sm:text-left gap-6">
+        <div className="text-center sm:text-left">
           {/* Eyebrow — pill style matching Figma / hero CTA theme */}
           <div className="inline-flex items-center mb-3">
             <span
@@ -97,26 +97,26 @@ export default function Categories() {
         </div>
 
         {/* Right side CTA */}
-        <div className="flex shrink-0">
+        <div className="hidden sm:flex sm:justify-end">
           <a
             href="/shop"
-            className="group inline-flex items-center gap-3 rounded-full py-1 pl-4 pr-1 shadow-sm transition-all duration-300 ease-out hover:shadow-md border"
+            className="group inline-flex items-center gap-1.5 rounded-full py-1 px-2.5 shadow-sm transition-all duration-300 ease-out hover:shadow-md border"
             style={{
               backgroundColor: "rgba(255,99,51,0.08)",
               borderColor: "rgba(255,99,51,0.22)",
             }}
           >
             <span
-              className="text-[11px] font-semibold uppercase tracking-wide sm:text-[12px]"
+              className="text-[11px] font-semibold uppercase tracking-wide sm:text-[11px]"
               style={{ color: "#FF6333" }}
             >
               Explore Collection
             </span>
             <span
-              className="flex h-8 w-8 items-center justify-center rounded-full text-white transition-transform duration-300 ease-out group-hover:rotate-45 sm:h-9 sm:w-9"
+              className="flex h-7 w-7 items-center justify-center rounded-full text-white transition-transform duration-300 ease-out group-hover:rotate-45"
               style={{ backgroundColor: "#FF6333" }}
             >
-              <ArrowUpRight size={15} />
+              <ArrowUpRight size={14} />
             </span>
           </a>
         </div>
@@ -170,6 +170,31 @@ export default function Categories() {
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* Mobile CTA under Swiper */}
+        <div className="flex justify-center mt-5 sm:hidden">
+          <a
+            href="/shop"
+            className="inline-flex items-center gap-1.5 rounded-full py-1.5 px-3 shadow-sm transition-all duration-300 ease-out hover:shadow-md border"
+            style={{
+              backgroundColor: "rgba(255,99,51,0.08)",
+              borderColor: "rgba(255,99,51,0.22)",
+            }}
+          >
+            <span
+              className="text-[11px] font-semibold uppercase tracking-wide"
+              style={{ color: "#FF6333" }}
+            >
+              Explore Collection
+            </span>
+            <span
+              className="flex h-7 w-7 items-center justify-center rounded-full text-white transition-transform duration-300 ease-out group-hover:rotate-45"
+              style={{ backgroundColor: "#FF6333" }}
+            >
+              <ArrowUpRight size={14} />
+            </span>
+          </a>
+        </div>
       </div>
 
       <style>{`

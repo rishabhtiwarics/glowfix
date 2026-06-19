@@ -83,7 +83,7 @@ export default function BestSellerShowcase() {
       aria-label="Best seller beauty products"
     >
       <div className="mx-auto max-w-[1400px] px-3 sm:px-4">
-        <div className="mb-5 flex flex-col gap-4 sm:mb-7 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-5 flex flex-col items-center text-center gap-4 md:mb-7 lg:flex-row lg:items-end lg:justify-between lg:text-left">
           <div>
             <span
               className="mb-3 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em]"
@@ -99,27 +99,27 @@ export default function BestSellerShowcase() {
               />
               Beauty picks
             </span>
-            <h2 className="font-sans text-[26px] font-bold leading-tight tracking-tight text-[#111111] sm:text-[34px] lg:text-[40px]">
+            <h2 className="font-sans text-[26px] font-bold leading-tight tracking-tight text-[#111111] md:text-[34px] lg:text-[40px]">
               Best <span style={{ color: "#FF6333" }}>Seller</span>
             </h2>
           </div>
 
           <a
             href="/shop"
-            className="group inline-flex w-fit items-center gap-3 rounded-full py-1 pl-4 pr-1 shadow-sm transition-shadow duration-300 ease-out hover:shadow-md sm:gap-4 sm:pl-5"
+            className="group hidden w-fit items-center gap-3 rounded-full py-1 pl-4 pr-1 shadow-sm transition-shadow duration-300 ease-out hover:shadow-md lg:inline-flex lg:gap-4 lg:pl-5"
             style={{
               background: "rgba(255,99,51,0.08)",
               border: "1px solid rgba(255,99,51,0.22)",
             }}
           >
             <span
-              className="text-[11px] font-semibold uppercase tracking-wide sm:text-[12px]"
+              className="text-[11px] font-semibold uppercase tracking-wide lg:text-[12px]"
               style={{ color: "#FF6333" }}
             >
               View all
             </span>
             <span
-              className="flex h-8 w-8 items-center justify-center rounded-full text-white transition-transform duration-300 ease-out group-hover:rotate-45 sm:h-9 sm:w-9"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-white transition-transform duration-300 ease-out group-hover:rotate-45 lg:h-9 lg:w-9"
               style={{ backgroundColor: "#FF6333" }}
             >
               <ArrowUpRight size={15} />
@@ -200,11 +200,37 @@ export default function BestSellerShowcase() {
 
         <div className="flex min-w-0 flex-col">
           <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {BEST_SELLERS.map((product) => (
-              <ProductRow key={product.id} product={product} />
+            {BEST_SELLERS.map((product, index) => (
+              <div key={product.id} className={index >= 4 ? 'hidden lg:block' : ''}>
+                <ProductRow product={product} />
+              </div>
             ))}
           </div>
         </div>
+        </div>
+
+        <div className="flex justify-center lg:hidden mt-6">
+          <a
+            href="/shop"
+            className="group inline-flex w-fit items-center gap-3 rounded-full py-1 pl-4 pr-1 shadow-sm transition-shadow duration-300 ease-out hover:shadow-md gap-4 pl-5"
+            style={{
+              background: "rgba(255,99,51,0.08)",
+              border: "1px solid rgba(255,99,51,0.22)",
+            }}
+          >
+            <span
+              className="text-[11px] font-semibold uppercase tracking-wide text-[12px]"
+              style={{ color: "#FF6333" }}
+            >
+              View all
+            </span>
+            <span
+              className="flex h-8 w-8 items-center justify-center rounded-full text-white transition-transform duration-300 ease-out group-hover:rotate-45 h-9 w-9"
+              style={{ backgroundColor: "#FF6333" }}
+            >
+              <ArrowUpRight size={15} />
+            </span>
+          </a>
         </div>
       </div>
     </section>

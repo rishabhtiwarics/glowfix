@@ -76,8 +76,8 @@ function ImageFeatureCard({ card }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const paginationPosition =
     card.paginationSide === "left"
-      ? "bottom-5 sm:bottom-7 left-5 sm:left-7"
-      : "bottom-5 sm:bottom-7 right-5 sm:right-7";
+      ? "bottom-5 left-1/2 -translate-x-1/2 sm:bottom-7 sm:left-5 sm:translate-x-0"
+      : "bottom-5 left-1/2 -translate-x-1/2 sm:bottom-7 sm:left-auto sm:right-5 sm:translate-x-0";
 
   return (
     <article className="group relative min-h-[300px] overflow-hidden bg-[#f3d8cf] sm:min-h-[360px] lg:min-h-[460px]">

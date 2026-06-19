@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import { ChevronLeft, ChevronRight, Heart, ShoppingBag, Star } from "lucide-react";
 
 import "swiper/css";
@@ -117,8 +117,8 @@ export default function OurProducts() {
       aria-label="Our Products"
     >
       {/* ── Section header ── */}
-      <div className="max-w-[1400px] mx-auto px-3 sm:px-4 mb-8 sm:mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
-        <div className="text-left">
+      <div className="max-w-[1400px] mx-auto px-3 sm:px-4 mb-8 sm:mb-12 flex flex-col items-center text-center sm:flex-row sm:items-end sm:justify-between sm:text-left gap-6">
+        <div className="text-center sm:text-left">
           {/* Eyebrow */}
           <div className="inline-flex items-center mb-3">
             <span
@@ -149,7 +149,7 @@ export default function OurProducts() {
         </div>
 
         {/* Custom Navigation Arrow Buttons on the Right */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="hidden sm:flex items-center gap-3 shrink-0">
           <button
             ref={prevRef}
             aria-label="Previous products"
@@ -180,21 +180,26 @@ export default function OurProducts() {
       {/* ── Swiper Slider ── */}
       <div className="relative max-w-[1400px] mx-auto px-3 sm:px-4">
         <Swiper
-          modules={[Navigation]}
+          modules={[Navigation, Autoplay]}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
+          }}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true,
           }}
           onBeforeInit={(swiper) => {
             swiper.params.navigation.prevEl = prevRef.current;
             swiper.params.navigation.nextEl = nextRef.current;
           }}
           onInit={() => setInit(true)}
-          spaceBetween={20}
-          slidesPerView={1}
+          spaceBetween={16}
+          slidesPerView={2}
           breakpoints={{
-            480: { slidesPerView: 2, spaceBetween: 20 },
-            768: { slidesPerView: 3, spaceBetween: 24 },
+            640: { slidesPerView: 2, spaceBetween: 16 },
+            768: { slidesPerView: 3, spaceBetween: 20 },
             1024: { slidesPerView: 4, spaceBetween: 24 },
             1400: { slidesPerView: 5, spaceBetween: 24 },
           }}
@@ -202,13 +207,13 @@ export default function OurProducts() {
         >
           {PRODUCTS.map((product) => (
             <SwiperSlide key={product.id} className="h-auto">
-              <article className="group bg-white rounded-2xl border border-orange-100/80 p-4 transition-all duration-300 hover:shadow-[0_12px_28px_rgba(255,99,51,0.05)] hover:border-orange-200/80 flex flex-col justify-between h-full relative overflow-hidden">
+              <article className="group bg-white rounded-lg sm:rounded-xl lg:rounded-2xl border border-orange-100/80 p-3 sm:p-4 transition-all duration-300 hover:shadow-[0_12px_28px_rgba(255,99,51,0.05)] hover:border-orange-200/80 flex flex-col justify-between h-full relative overflow-hidden">
                 {/* Image Section */}
-                <div className="relative w-full aspect-square rounded-xl bg-[#f6f7f9] overflow-hidden mb-4">
+                <div className="relative w-full aspect-square rounded-lg sm:rounded-xl bg-[#f6f7f9] overflow-hidden mb-3 sm:mb-4">
                   {/* Discount Badge */}
                   {product.discount && (
                     <span
-                      className="absolute top-3 left-3 z-10 text-[10px] font-bold px-2 py-0.5 rounded shadow-sm"
+                      className="absolute top-2 sm:top-3 left-2 sm:left-3 z-10 text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded shadow-sm"
                       style={{ background: "#FFEBE5", color: "#FF6333" }}
                     >
                       {product.discount}
@@ -218,12 +223,12 @@ export default function OurProducts() {
                   {/* Heart Wishlist Icon */}
                   <button
                     onClick={() => toggleLike(product.id)}
-                    className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 transition-all duration-200 hover:scale-105"
+                    className="absolute top-2 sm:top-3 right-2 sm:right-3 z-10 flex h-7 sm:h-8 w-7 sm:w-8 items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 transition-all duration-200 hover:scale-105"
                     style={{ color: likedProducts[product.id] ? "#FF6333" : "#888888" }}
                     aria-label="Add to wishlist"
                   >
                     <Heart
-                      size={16}
+                      size={14}
                       fill={likedProducts[product.id] ? "#FF6333" : "none"}
                     />
                   </button>
@@ -246,29 +251,29 @@ export default function OurProducts() {
 
                 {/* Details Section */}
                 <div className="flex flex-col flex-grow text-left">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+                  <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">
                     {product.category}
                   </span>
-                  <h3 className="font-sans text-[14px] font-bold text-gray-800 leading-snug tracking-tight mb-2 group-hover:text-[#FF6333] transition-colors duration-200 min-h-[40px]">
+                  <h3 className="font-sans text-[13px] sm:text-[14px] font-bold text-gray-800 leading-snug tracking-tight mb-2 group-hover:text-[#FF6333] transition-colors duration-200 min-h-[36px] sm:min-h-[40px]">
                     {product.name}
                   </h3>
 
                   {/* Rating */}
-                  <div className="flex items-center mb-2.5">
+                  <div className="flex items-center mb-2">
                     {renderStars(product.rating)}
-                    <span className="text-[10px] font-medium text-gray-400 ml-1.5">
+                    <span className="text-[8px] sm:text-[10px] font-medium text-gray-400 ml-1">
                       ({product.reviews})
                     </span>
                   </div>
 
                   {/* Price */}
-                  <div className="mt-auto flex items-center justify-between gap-3">
-                    <div className="flex min-w-0 flex-wrap items-baseline gap-2">
-                      <span className="text-[16px] font-bold text-gray-900">
+                  <div className="mt-auto flex items-center justify-between gap-2 sm:gap-3">
+                    <div className="flex min-w-0 flex-wrap items-baseline gap-1.5 sm:gap-2">
+                      <span className="text-[14px] sm:text-[16px] font-bold text-gray-900">
                         {product.price}
                       </span>
                       {product.oldPrice && (
-                        <span className="text-[12px] text-gray-400 line-through">
+                        <span className="text-[10px] sm:text-[12px] text-gray-400 line-through">
                           {product.oldPrice}
                         </span>
                       )}
@@ -276,11 +281,11 @@ export default function OurProducts() {
 
                     <button
                       type="button"
-                      className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_22px_rgba(255,99,51,0.22)]"
+                      className="inline-flex h-8 sm:h-9 w-8 sm:w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_22px_rgba(255,99,51,0.22)]"
                       style={{ backgroundColor: "#FF6333" }}
                       aria-label={`Add ${product.name} to cart`}
                     >
-                      <ShoppingBag size={16} />
+                      <ShoppingBag size={14} />
                     </button>
                   </div>
                 </div>
@@ -288,6 +293,34 @@ export default function OurProducts() {
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* Mobile navigation controls below slider */}
+        <div className="flex justify-center gap-3 mt-5 sm:hidden">
+          <button
+            ref={prevRef}
+            aria-label="Previous products"
+            className="flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 border hover:bg-[#FF6333] hover:text-white"
+            style={{
+              backgroundColor: "rgba(255,99,51,0.08)",
+              borderColor: "rgba(255,99,51,0.22)",
+              color: "#FF6333",
+            }}
+          >
+            <ChevronLeft size={20} strokeWidth={2.5} />
+          </button>
+          <button
+            ref={nextRef}
+            aria-label="Next products"
+            className="flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 border hover:bg-[#FF6333] hover:text-white"
+            style={{
+              backgroundColor: "rgba(255,99,51,0.08)",
+              borderColor: "rgba(255,99,51,0.22)",
+              color: "#FF6333",
+            }}
+          >
+            <ChevronRight size={20} strokeWidth={2.5} />
+          </button>
+        </div>
       </div>
 
       <style>{`
