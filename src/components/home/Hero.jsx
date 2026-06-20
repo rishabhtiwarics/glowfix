@@ -6,8 +6,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-fade";
 
-import Header from "./Header";
-
 const HERO_IMAGES = [
   "/images/hero1.png",
   "/images/hero2.png",
@@ -83,8 +81,6 @@ export default function Hero() {
         ))}
       </Swiper>
 
-      {/* Header */}
-      <Header />
 
       {/* Hero content — bottom center on mobile, bottom left on sm+ */}
       <div className="absolute inset-x-0 bottom-0 z-10 pb-9 text-center sm:pb-12 sm:text-left lg:pb-14">

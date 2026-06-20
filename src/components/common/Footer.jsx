@@ -1,4 +1,5 @@
 import { ArrowUpRight, Leaf, Rabbit, Sparkles, ShieldCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 
 /* ── Shared logo SVG ── */
 function Logo({ size = 28 }) {
@@ -52,12 +53,12 @@ export default function Footer() {
           
           {/* Left Column */}
           <div className="flex flex-1 flex-col justify-center px-5 py-8 md:p-14 lg:p-16">
-            <a href="/" className="mb-7 flex items-center gap-2.5 sm:mb-10">
+            <Link to="/" className="mb-7 flex items-center gap-2.5 sm:mb-10">
               <Logo size={28} />
               <span className="text-[24px] font-bold leading-none tracking-tight text-white sm:text-[28px]">
                 GlowFix
               </span>
-            </a>
+            </Link>
             
             <h2 className="mb-3 text-[21px] font-semibold text-white sm:mb-4 sm:text-[30px]">
               Premium Cosmetic Experts
@@ -111,8 +112,8 @@ export default function Footer() {
               </p>
               
               <div>
-                <a
-                  href="/shop"
+                <Link
+                  to="/shop"
                   className="group inline-flex items-center gap-4 rounded-full bg-white py-1.5 pl-5 pr-1.5 shadow-sm transition-shadow duration-300 ease-out hover:shadow-md sm:gap-5 sm:pl-7"
                 >
                   <span className="text-[11px] font-semibold uppercase tracking-wide text-black sm:text-[13px]">
@@ -124,7 +125,7 @@ export default function Footer() {
                   >
                     <ArrowUpRight size={18} />
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -134,13 +135,13 @@ export default function Footer() {
         <div className="mx-5 flex flex-col items-center justify-between gap-4 border-t border-white/10 py-6 sm:mx-8 sm:flex-row sm:gap-6 md:mx-14 lg:mx-16">
           <nav className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
             {FOOTER_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
+                to={link.href}
                 className="text-[12px] font-medium text-white/70 transition-colors hover:text-white sm:text-[13px]"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
           <p className="text-center text-[12px] text-white/50 sm:text-right sm:text-[13px]">

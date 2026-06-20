@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import { ChevronLeft, ChevronRight, Heart, ShoppingBag, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import ProductCard from "../shop/ProductCard";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -81,7 +82,7 @@ const PRODUCTS = [
   },
 ];
 
-export default function OurProducts() {
+export default function OurProducts({ eyebrow = "Our Products", headingMain = "Explore", headingHighlight = "New Arrivals" }) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [_, setInit] = useState(false);
@@ -92,22 +93,6 @@ export default function OurProducts() {
       ...prev,
       [id]: !prev[id],
     }));
-  };
-
-  const renderStars = (rating) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <Star
-          key={i}
-          size={12}
-          fill={i <= rating ? "#FF6333" : "transparent"}
-          color={i <= rating ? "#FF6333" : "#d1d5db"}
-          className="mr-0.5 inline-block"
-        />
-      );
-    }
-    return stars;
   };
 
   return (
@@ -133,7 +118,7 @@ export default function OurProducts() {
                 className="h-1.5 w-1.5 rounded-full shrink-0"
                 style={{ background: "#FF6333" }}
               />
-              Our Products
+              {eyebrow}
             </span>
           </div>
 
@@ -142,7 +127,7 @@ export default function OurProducts() {
             className="font-sans text-[24px] font-bold leading-tight tracking-tight sm:text-[34px] lg:text-[40px]"
             style={{ color: "#111111" }}
           >
-            Explore <span style={{ color: "#FF6333" }}>New Arrivals</span>
+            {headingMain} <span style={{ color: "#FF6333" }}>{headingHighlight}</span>
           </h2>
 
 
@@ -207,89 +192,11 @@ export default function OurProducts() {
         >
           {PRODUCTS.map((product) => (
             <SwiperSlide key={product.id} className="h-auto">
-              <article className="group bg-white rounded-lg sm:rounded-xl lg:rounded-2xl border border-orange-100/80 p-3 sm:p-4 transition-all duration-300 hover:shadow-[0_12px_28px_rgba(255,99,51,0.05)] hover:border-orange-200/80 flex flex-col justify-between h-full relative overflow-hidden">
-                {/* Image Section */}
-                <div className="relative w-full aspect-square rounded-lg sm:rounded-xl bg-[#f6f7f9] overflow-hidden mb-3 sm:mb-4">
-                  {/* Discount Badge */}
-                  {product.discount && (
-                    <span
-                      className="absolute top-2 sm:top-3 left-2 sm:left-3 z-10 text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded shadow-sm"
-                      style={{ background: "#FFEBE5", color: "#FF6333" }}
-                    >
-                      {product.discount}
-                    </span>
-                  )}
-
-                  {/* Heart Wishlist Icon */}
-                  <button
-                    onClick={() => toggleLike(product.id)}
-                    className="absolute top-2 sm:top-3 right-2 sm:right-3 z-10 flex h-7 sm:h-8 w-7 sm:w-8 items-center justify-center rounded-full bg-white shadow-sm border border-gray-100 transition-all duration-200 hover:scale-105"
-                    style={{ color: likedProducts[product.id] ? "#FF6333" : "#888888" }}
-                    aria-label="Add to wishlist"
-                  >
-                    <Heart
-                      size={14}
-                      fill={likedProducts[product.id] ? "#FF6333" : "none"}
-                    />
-                  </button>
-
-                  {/* First Image (slides up to top) */}
-                  <img
-                    src={product.image1}
-                    alt={product.name}
-                    className="h-full w-full object-cover transition-transform duration-500 ease-in-out transform group-hover:-translate-y-full"
-                    loading="lazy"
-                  />
-                  {/* Second Image (slides up from bottom) */}
-                  <img
-                    src={product.image2}
-                    alt={product.name}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-in-out transform translate-y-full group-hover:translate-y-0"
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* Details Section */}
-                <div className="flex flex-col flex-grow text-left">
-                  <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">
-                    {product.category}
-                  </span>
-                  <h3 className="font-sans text-[13px] sm:text-[14px] font-bold text-gray-800 leading-snug tracking-tight mb-2 group-hover:text-[#FF6333] transition-colors duration-200 min-h-[36px] sm:min-h-[40px]">
-                    {product.name}
-                  </h3>
-
-                  {/* Rating */}
-                  <div className="flex items-center mb-2">
-                    {renderStars(product.rating)}
-                    <span className="text-[8px] sm:text-[10px] font-medium text-gray-400 ml-1">
-                      ({product.reviews})
-                    </span>
-                  </div>
-
-                  {/* Price */}
-                  <div className="mt-auto flex items-center justify-between gap-2 sm:gap-3">
-                    <div className="flex min-w-0 flex-wrap items-baseline gap-1.5 sm:gap-2">
-                      <span className="text-[14px] sm:text-[16px] font-bold text-gray-900">
-                        {product.price}
-                      </span>
-                      {product.oldPrice && (
-                        <span className="text-[10px] sm:text-[12px] text-gray-400 line-through">
-                          {product.oldPrice}
-                        </span>
-                      )}
-                    </div>
-
-                    <button
-                      type="button"
-                      className="inline-flex h-8 sm:h-9 w-8 sm:w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_22px_rgba(255,99,51,0.22)]"
-                      style={{ backgroundColor: "#FF6333" }}
-                      aria-label={`Add ${product.name} to cart`}
-                    >
-                      <ShoppingBag size={14} />
-                    </button>
-                  </div>
-                </div>
-              </article>
+              <ProductCard
+                product={product}
+                liked={likedProducts[product.id]}
+                onToggleLike={toggleLike}
+              />
             </SwiperSlide>
           ))}
         </Swiper>

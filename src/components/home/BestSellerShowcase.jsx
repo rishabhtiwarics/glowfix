@@ -1,5 +1,6 @@
-import { ArrowUpRight, IndianRupee, ShoppingBag, Star } from "lucide-react";
-
+import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ProductRow } from "../shop/ProductCard";
 const BEST_SELLERS = [
   {
     id: 1,
@@ -104,8 +105,8 @@ export default function BestSellerShowcase() {
             </h2>
           </div>
 
-          <a
-            href="/shop"
+          <Link
+            to="/shop"
             className="group hidden w-fit items-center gap-3 rounded-full py-1 pl-4 pr-1 shadow-sm transition-shadow duration-300 ease-out hover:shadow-md lg:inline-flex lg:gap-4 lg:pl-5"
             style={{
               background: "rgba(255,99,51,0.08)",
@@ -124,7 +125,7 @@ export default function BestSellerShowcase() {
             >
               <ArrowUpRight size={15} />
             </span>
-          </a>
+          </Link>
         </div>
 
         <div className="grid gap-5 lg:grid-cols-[minmax(340px,0.4fr)_minmax(0,0.6fr)] lg:gap-7">
@@ -174,8 +175,8 @@ export default function BestSellerShowcase() {
             <p className="mt-4 max-w-[280px] text-[14px] leading-relaxed text-[#666666]">
               Creamy textures, soft botanical notes, and glow-first essentials for daily care.
             </p>
-            <a
-              href="/shop"
+            <Link
+              to="/shop"
               className="mt-7 inline-flex w-fit items-center gap-3 rounded-full py-1 pl-4 pr-1 shadow-sm transition-shadow duration-300 ease-out hover:shadow-md sm:gap-4 sm:pl-5"
               style={{
                 background: "rgba(255,99,51,0.08)",
@@ -194,7 +195,7 @@ export default function BestSellerShowcase() {
               >
                 <ArrowUpRight size={15} />
               </span>
-            </a>
+            </Link>
           </div>
         </article>
 
@@ -210,8 +211,8 @@ export default function BestSellerShowcase() {
         </div>
 
         <div className="flex justify-center lg:hidden mt-6">
-          <a
-            href="/shop"
+          <Link
+            to="/shop"
             className="group inline-flex w-fit items-center gap-3 rounded-full py-1 pl-4 pr-1 shadow-sm transition-shadow duration-300 ease-out hover:shadow-md gap-4 pl-5"
             style={{
               background: "rgba(255,99,51,0.08)",
@@ -230,56 +231,11 @@ export default function BestSellerShowcase() {
             >
               <ArrowUpRight size={15} />
             </span>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
   );
 }
 
-function ProductRow({ product }) {
-  return (
-    <article className="group min-w-0 rounded-[14px] border border-[#f1e8e4] bg-white p-2.5 shadow-[0_8px_22px_rgba(17,17,17,0.035)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ffd0c1] hover:bg-[#fffaf8] hover:shadow-[0_14px_28px_rgba(255,99,51,0.08)]">
-      <div className="relative aspect-square w-full overflow-hidden rounded-[11px] bg-[#f6f1ef]">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
-        />
-        <span
-          className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full text-white opacity-0 shadow-sm transition-all duration-300 group-hover:opacity-100"
-          style={{ backgroundColor: "#FF6333" }}
-        >
-          <ShoppingBag size={14} />
-        </span>
-      </div>
-      <div className="pt-3">
-        <h3 className="line-clamp-2 min-h-[36px] text-[12px] font-semibold leading-snug text-[#111111] transition-colors duration-300 group-hover:text-[#FF6333] sm:text-[13px]">
-          {product.name}
-        </h3>
-        <div className="mt-2 flex items-center">
-          {Array.from({ length: 5 }, (_, index) => (
-            <Star
-              key={index}
-              size={11}
-              fill={index < product.rating ? "#FF7373" : "#d9d9d9"}
-              color={index < product.rating ? "#FF7373" : "#d9d9d9"}
-              className="mr-0.5"
-            />
-          ))}
-        </div>
-        <div className="mt-2 flex flex-wrap items-baseline gap-1.5">
-          <span className="inline-flex items-center text-[13px] font-bold text-[#111111] sm:text-[14px]">
-            <IndianRupee size={12} strokeWidth={3} />
-            {product.price}
-          </span>
-          <span className="inline-flex items-center text-[11px] text-[#888888] line-through sm:text-[12px]">
-            <IndianRupee size={10} strokeWidth={2.5} />
-            {product.oldPrice}
-          </span>
-        </div>
-      </div>
-    </article>
-  );
-}
+
