@@ -104,12 +104,14 @@ export default function ProductCard({ product, liked, onToggleLike }) {
   );
 }
 
+import { Link } from "react-router-dom";
+
 export function ProductRow({ product }) {
   return (
-    <article className="group min-w-0 rounded-[14px] border border-[#f1e8e4] bg-white p-2.5 shadow-[0_8px_22px_rgba(17,17,17,0.035)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ffd0c1] hover:bg-[#fffaf8] hover:shadow-[0_14px_28px_rgba(255,99,51,0.08)]">
+    <Link to={`/product/${product.id}`} className="group min-w-0 rounded-[14px] border border-[#f1e8e4] bg-white p-2.5 shadow-[0_8px_22px_rgba(17,17,17,0.035)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ffd0c1] hover:bg-[#fffaf8] hover:shadow-[0_14px_28px_rgba(255,99,51,0.08)] block">
       <div className="relative aspect-square w-full overflow-hidden rounded-[11px] bg-[#f6f1ef]">
         <img
-          src={product.image}
+          src={product.image || product.image1}
           alt={product.name}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
@@ -139,14 +141,16 @@ export function ProductRow({ product }) {
         <div className="mt-2 flex flex-wrap items-baseline gap-1.5">
           <span className="inline-flex items-center text-[13px] font-bold text-[#111111] sm:text-[14px]">
             <span className="mr-0.5 text-[12px]">₹</span>
-            {product.price}
+            {product.price.replace('₹', '')}
           </span>
-          <span className="inline-flex items-center text-[11px] text-[#888888] line-through sm:text-[12px]">
-            <span className="mr-0.5 text-[10px]">₹</span>
-            {product.oldPrice}
-          </span>
+          {product.oldPrice && (
+            <span className="inline-flex items-center text-[11px] text-[#888888] line-through sm:text-[12px]">
+              <span className="mr-0.5 text-[10px]">₹</span>
+              {product.oldPrice.replace('₹', '')}
+            </span>
+          )}
         </div>
       </div>
-    </article>
+    </Link>
   );
 }

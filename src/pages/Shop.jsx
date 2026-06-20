@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ShopHero from '../components/shop/ShopHero';
 import { ProductRow } from '../components/shop/ProductCard';
 import OurProducts from '../components/home/OurProducts';
@@ -117,7 +117,19 @@ const SHOP_PRODUCTS = [
 export default function Shop() {
   const [likedProducts, setLikedProducts] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
-  const ITEMS_PER_PAGE = 8;
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
+
+  useEffect(() => {
+    const onResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      setCurrentPage(1); // reset page on breakpoint change
+    };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  const ITEMS_PER_PAGE = isMobile ? 4 : 8;
   const totalPages = Math.ceil(SHOP_PRODUCTS.length / ITEMS_PER_PAGE);
   const paginatedProducts = SHOP_PRODUCTS.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -324,7 +336,7 @@ export default function Shop() {
 
               {/* Pagination */}
               {totalPages > 1 && (
-                <div className="mt-10 flex items-center gap-2">
+                <div className="mt-10 flex items-center gap-2 justify-center sm:justify-start">
                   {/* Prev */}
                   <button
                     onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
